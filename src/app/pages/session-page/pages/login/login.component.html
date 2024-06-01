@@ -1,14 +1,26 @@
 <form class="signupForm" [formGroup]="credForm">
-    <h2>Login</h2>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" formControlName="email" required>
+    <div class="heading">
+        <h2>Login</h2>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" formControlName="password" required>
+    <div class="body">
+        <div class="field">
+            <label for="email"><strong>Email</strong></label>
+            <div class="input">
+                <input type="email" id="email" name="email" formControlName="email" required>
+                <p *ngIf="credForm.get('email')!.invalid && credForm.get('email')!.touched">Email is empty or invalid</p>
+            </div>
+        </div>
+        <div class="field">
+            <label for="password"><strong>Password</strong></label>
+            <div class="input">
+                <input type="password" id="password" name="password" formControlName="password" required>
+                <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p>
+            </div>
+        </div>
     </div>
-    <button type="submit" (click)="onSubmit()">Login</button>
-    <p>Already have an account? <button routerLink="signup">Signup</button></p>
+    <div class="footer">
+        <button  [disabled]="!credForm.valid" class="btn" type="submit" (click)="login()"><strong>Login</strong></button>
+        <p><strong> Create an account click</strong> <a routerLink="signup"> Signup</a></p>
+    </div>
 </form>
   

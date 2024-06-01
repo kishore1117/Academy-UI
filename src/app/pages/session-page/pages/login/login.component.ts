@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/service/auth.service';
-import { SigupBody } from '../../session-models/signup-model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    
+    private toastr: ToastrService
    ) {}
    ngOnInit(): void {
     this.credForm = new FormGroup({
@@ -35,20 +35,16 @@ export class LoginComponent implements OnInit {
       next:(res:any)=>{
         localStorage.setItem('token', res.token);
         this.credForm.reset();
+        this.toastr.success('Login successfull')
         this.router.navigate(['academy/dashboard'])
       },
       error:(err:any)=>{
-        console.log(err)
+        this.toastr.error(err.error.message)
         this.credForm.reset();
       }
     })
   }
-  onSubmit(): void {
-    if (this.credForm.invalid) {
-      return;
-    }
-    this.login();
-  }
+
   redirect(){
     this.router.navigate(['/signup'])
   }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SigupBody } from '../../session-models/signup-model';
 import { AuthService } from 'src/app/shared/service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -14,14 +15,15 @@ export class SignupComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private toastr: ToastrService
    ) {}
 
    ngOnInit(){
     this.signupForm = new FormGroup({
-      name: new FormControl(''),
-      phone_number: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl('')
+      name: new FormControl('', [Validators.required]),
+      phone_number: new FormControl('',[Validators.required,Validators.minLength(10)]),
+      email: new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl('',[Validators.required])
     })
    }
 
@@ -36,16 +38,17 @@ export class SignupComponent {
           next:(res:any)=>{
             localStorage.setItem('token', res.token);
             this.signupForm.reset();
+            this.toastr.success('Signup successfull')
             this.router.navigate(['academy/dashboard'])
           },
           error:(err:any)=>{
-            console.log(err)
+            this.toastr.error(err.error.message)
             this.signupForm.reset()
           }
         })
       },
       error:(err:any)=>{
-        console.log(err)
+        this.toastr.error(err.error.message)
         this.signupForm.reset()
       }
     });
@@ -53,10 +56,9 @@ export class SignupComponent {
   }
    onSubmit(){
     if (this.signupForm.invalid) {
-      return;
-    }
-    console.log('Form submitted!', this.signupForm.value);
-    this.signup(this.signupForm.value)
+    }else{
+      this.signup(this.signupForm.value)
+    }    
    }
   redirect(){
     this.router.navigate(['session/login'])

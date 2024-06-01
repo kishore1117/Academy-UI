@@ -4,6 +4,9 @@ import { AppComponent } from './app.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +17,13 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut:2000 ,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
