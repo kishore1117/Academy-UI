@@ -5,23 +5,21 @@ import { LoginComponent } from "./pages/login/login.component";
 import { SignupComponent } from "./pages/signup/signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { CommonModule } from "@angular/common";
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
     declarations:[
         SessionPageComponent,
         LoginComponent,
         SignupComponent,
-        FooterComponent,
-        HeaderComponent
+        FooterComponent
     ],
     imports:[
         SessionRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule,
+        SharedModule,
         ToastrModule.forRoot({
             timeOut: 2000,
             positionClass: 'toast-top-center',
