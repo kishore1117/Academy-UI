@@ -1,0 +1,43 @@
+@import 'mixins';
+
+.header{
+    height: 70px;
+}
+.mat-toolbar-single-row{
+    white-space: wrap
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+@include xtrasmall{
+    .sidenav {
+        width: 100%;
+    }
+}
+.mat-elevation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-details{
+    button{
+        align-items: center;
+    }
+}
+.mat-drawer.mat-drawer-side{
+    width: 15%;
+}
+.mat-drawer-inner-container{
+    justify-content: center;
+}
+.mat-mdc-list-base:hover {
+    cursor: pointer;
+    // background: rgb(207, 219, 247);
+}
+.mat-mdc-list-base {
+    display: flex;
+    flex-direction: column;
+}
