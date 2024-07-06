@@ -20,4 +20,12 @@ export class UserService{
     getUser(franchise_id:number):Observable<any>{
         return this.http.get<any>(`${this.url}/location?franchise_id=${franchise_id}`,{ headers: this.headers })
     }
+
+    getLocationById(id:number):Observable<any>{
+        return this.http.get<any>(`${this.url}/location/${id}`,{ headers: this.headers })
+    }
+
+    getLocationStudents(id:number):Observable<any>{
+        return this.http.get<any>(`${this.url}/location/students?location_id=${id}`,{ headers: this.headers })
+    }
 }

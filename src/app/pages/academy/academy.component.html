@@ -12,8 +12,6 @@
             <div class="user-details">
                 <button [matMenuTriggerFor]="lvl1master" style="border-radius: 30%; align-items: self-end;" mat-button> <img width="20px" height="20px" src="../../../assets/icons8-user-30.png"> </button>
                 <mat-menu #lvl1master="matMenu" >
-                    <button [matMenuTriggerFor]="company" mat-menu-item>Company</button>
-                    <button [matMenuTriggerFor]="customer" mat-menu-item>Customer</button>
                     <button mat-menu-item (click)="logout()">Logout</button>
                 </mat-menu>
                 <mat-menu #company="matMenu">

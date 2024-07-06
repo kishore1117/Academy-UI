@@ -1,0 +1,112 @@
+@import 'mixins';
+
+.studentForm {
+  padding: 16px;
+//   margin: 1.4em;
+  background: white;
+  border-radius: 0.6em;
+  box-shadow: 0 1px 4px #7773;
+//   @include smallAndUp {
+//     margin: auto;
+//     max-width: 400px;
+//   }
+}
+.heading {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2em;
+}
+
+.body {
+width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.2em;
+  .field {
+    width: 100%;
+  }
+  label {
+    font-size: small;
+  }
+  .input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: upset;
+    margin-bottom: 0.6em;
+    p {
+      font-size: small;
+      color: red;
+    }
+  }
+}
+input[type="email"],
+input[type="password"],
+input[type="name"],
+input[type="number"],
+input[type="date"],
+input[type="text"] ,
+#role{
+  width: 90%;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+.footer {
+  button {
+    cursor: pointer;
+    padding: 6px 10px;
+    margin-right: .2em;
+  }
+  .btn-close{
+    background-color: #FF0000;
+    border: 1px solid #FF0000;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.15;
+    padding: 10px 12px;
+    margin-bottom: 0.8em;
+  }
+  .btn {
+    background-color: #1652f0;
+    border: 1px solid #1652f0;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.15;
+    padding: 10px 12px;
+    margin-bottom: 0.8em;
+  }
+  .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+  a {
+    cursor: pointer;
+    color:#1652f0;
+    text-decoration: none;
+  }
+  p {
+    font-size: small;
+  }
+}
+.signup-form .error-message {
+  color: red;
+  margin-top: 10px;
+}
+.left-side{
+    width: 50%;
+}
+.right-side{
+    width: 50%;
+}
+.input-kit{
+    margin-top: .2em;
+    margin-bottom: .2em;
+    display: flex;
+    gap: 1em;
+}
