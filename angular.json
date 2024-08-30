@@ -37,7 +37,9 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/sass"]
+              "includePaths": [
+                "src/sass"
+              ]
             }
           },
           "configurations": {
@@ -103,6 +105,13 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "my-academy:build:production"
           }
         }
       }

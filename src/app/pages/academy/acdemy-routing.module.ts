@@ -3,6 +3,7 @@ import { AcademyComponent } from "./academy.component";
 import { NgModule } from "@angular/core";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { LocationComponent } from "./pages/location/location.component";
+import { AdminComponent } from "./pages/admin/admin.component";
 
 
 
@@ -19,6 +20,10 @@ const routes: Routes = [
             {
                 path:'location/:id',
                 component:LocationComponent
+            },
+            {
+                path:'admin',
+                component:AdminComponent
             }
         ]
     }

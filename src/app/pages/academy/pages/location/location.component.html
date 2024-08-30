@@ -52,17 +52,22 @@
                 <th mat-header-cell *matHeaderCellDef> type </th>
                 <td mat-cell *matCellDef="let element"> {{element.student_type}} </td>
               </ng-container>
-              <ng-container mat-header-cell  matColumnDef="action">
-                <td mat-header-cell  *matHeaderCellDef >Action</td>
+              <ng-container mat-header-cell  matColumnDef="update">
+                <td mat-header-cell  *matHeaderCellDef >Update</td>
                 <td mat-cell  *matCellDef="let element">
                   <button mat-icon-button color="primary" (click)="updateData(element,element.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button (click)="deleteRow(element.id)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
                 </td>
               </ng-container>
+                <ng-container mat-header-cell  matColumnDef="delete">
+                  <td mat-header-cell  *matHeaderCellDef >Delete</td>
+                  <td mat-cell  *matCellDef="let element">
+                    <button mat-icon-button (click)="deleteRow(element.id)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>

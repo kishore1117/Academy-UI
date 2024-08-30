@@ -83,7 +83,7 @@ $xxl-width:1440px;
 }
 
 @mixin large{
-    @media only screen and (min-width: #{$lg-width}) and (max-width: #{$xl-width}){
+    @media only screen and (min-width: #{$xs-width}) and (max-width: #{$lg-width}){
         @content;
     }
 }

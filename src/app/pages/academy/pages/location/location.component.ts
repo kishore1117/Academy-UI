@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from "@angular/core";
+import { Component } from "@angular/core";
 import { locationResponse } from "../../academy-models/academy.module";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../service/user.service";
@@ -8,6 +8,7 @@ import { Location } from "@angular/common";
 import { ConfirmationModelComponent } from "src/app/shared/components/confirmation-model/confirmation-model.component";
 import { StudentService } from "../../service/student.service";
 import { ToastrService } from 'ngx-toastr';
+import { BreakpointObserver } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-location",
@@ -20,14 +21,15 @@ export class LocationComponent {
     private userService: UserService,
     private studentService :StudentService,
     public dialog: MatDialog,
-    private cdRef: ChangeDetectorRef,
     private _location: Location,
     private toastr: ToastrService,
+    private observer: BreakpointObserver
   ) {}
   location: locationResponse;
   student:any;
+  isMobile: boolean;
   id: number;
-  displayedColumns: string[] = ['No', 'Name', 'Number', 'Email','role','school','student type','action'];
+  displayedColumns: string[] = ['No', 'Name', 'Number', 'Email','role','school','student type','update','delete'];
   isLoading: boolean = true;
 
   ngOnInit() {
@@ -36,9 +38,13 @@ export class LocationComponent {
     });
     this.getLocation();
     this.getLocationStudents();
-    // setTimeout(() => {
-    //   this.isLoading = false; // once component is ready, hide the loader
-    // }, 1000); 
+    this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {
+      if (screenSize.matches) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
   }
   backClicked() {
     this._location.back();
@@ -67,12 +73,7 @@ export class LocationComponent {
   }
 
   addData(){
-    const dilogRef =  this.dialog.open(StudentModelComponent,{
-      data:{id:this.id},  
-      width:'520px',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-    })
+    const dilogRef =  this.dialog.open(StudentModelComponent, {data:{id:this.id}})
     dilogRef.afterClosed().subscribe({
       next:(val)=>{
         if(val){
@@ -84,7 +85,7 @@ export class LocationComponent {
 
   updateData(data:any,id:number){
     const dilogRef = this.dialog.open(StudentModelComponent,{
-      data:{id:this.id,formData:data,student_id:id}
+      data:{id:this.id,formData:data,student_id:id},
     })
     dilogRef.afterClosed().subscribe({
       next:(val)=>{

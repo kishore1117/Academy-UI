@@ -16,9 +16,10 @@
             align-items: center;
         }
     }
-    .table{
-        overflow: scroll;
-    }
+
+}
+.table{
+    overflow: auto;
 }
 
 .card{
