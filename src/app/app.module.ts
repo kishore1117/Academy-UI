@@ -10,6 +10,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environment } from 'environment/environment';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp({"projectId":"academy-39222","appId":"1:833028477884:web:845d81977fd1b2183851b9","storageBucket":"academy-39222.appspot.com","apiKey":"AIzaSyD9anb2HVFjgWlPP53YVop9Ubn_ShxTdEw","authDomain":"academy-39222.firebaseapp.com","messagingSenderId":"833028477884","measurementId":"G-5KXYBCCMDJ"})),
+    provideFirebaseApp(() => initializeApp(environment)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
