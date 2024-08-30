@@ -8,28 +8,28 @@
             <label for="name"><strong>Name</strong></label>
             <div class="input">
                 <input type="name" id="'name" name="name" formControlName="name" required>
-                <p *ngIf="signupForm.get('name')!.invalid && signupForm.get('name')!.touched">name is empty</p>
+                <p class='error_msg' *ngIf="signupForm.get('name')!.invalid && signupForm.get('name')!.touched">name is empty</p>
             </div>
         </div>
         <div class="field">
             <label for="phone_number"><strong>Phone number</strong></label>
             <div class="input">
                 <input type="phone_number" id="phone_number" name="phone_number"  formControlName="phone_number" required>
-                <p *ngIf="signupForm.get('phone_number')!.invalid && signupForm.get('phone_number')!.touched">Phone number is empty or not valid</p>
+                <p class='error_msg' *ngIf="signupForm.get('phone_number')!.invalid && signupForm.get('phone_number')!.touched">Phone number is empty or not valid</p>
             </div>
         </div>
         <div class="field">
             <label for="email"><strong> Email</strong></label>
             <div class="input">
                 <input type="email" id="email" name="email" formControlName="email" required>
-                <p *ngIf="signupForm.get('email')!.invalid && signupForm.get('email')!.touched">Email is empty or invalid</p>
+                <p class='error_msg' *ngIf="signupForm.get('email')!.invalid && signupForm.get('email')!.touched">Email is empty or invalid</p>
             </div>
         </div>
         <div class="field">
             <label for="password"><strong>Password</strong></label>
             <div class="input">
                 <input type="password" id="password" name="password" formControlName="password" required>
-                <p *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched">Password is empty or invalid</p>
+                <p class='error_msg' *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched">Password is empty or invalid</p>
             </div>
         </div>
     </div>

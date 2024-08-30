@@ -12,11 +12,9 @@
             <div class="user-details">
                 <button [matMenuTriggerFor]="lvl1master" style="border-radius: 30%; align-items: self-end;" mat-button> <img width="20px" height="20px" src="../../../assets/icons8-user-30.png"> </button>
                 <mat-menu #lvl1master="matMenu" >
-                    <button [matMenuTriggerFor]="company" mat-menu-item>Company</button>
-                    <button [matMenuTriggerFor]="customer" mat-menu-item>Customer</button>
                     <button mat-menu-item (click)="logout()">Logout</button>
                 </mat-menu>
-                <mat-menu #company="matMenu">
+                <!-- <mat-menu #company="matMenu">
                     <button mat-menu-item>Term</button>
                     <button mat-menu-item>Tax</button>
                     <button mat-menu-item>Currency</button>
@@ -34,7 +32,7 @@
                 <mat-menu #variant="matMenu">
                     <button mat-menu-item>Color</button>
                     <button mat-menu-item>Size</button>
-                </mat-menu>
+                </mat-menu> -->
             </div>                
         </mat-toolbar>
     </div>
@@ -42,8 +40,11 @@
         <mat-sidenav-container>
             <mat-sidenav class="sidenav" #Sidenav [mode]="isMobile ? 'over' : 'side' "
                 [opened]="isMobile ? 'false' : 'true'">
-                <mat-nav-list>
+                <mat-nav-list routerLink="dashboard">
                     <a mat-button><mat-icon>dashboard</mat-icon> Dashboard</a>
+                </mat-nav-list>
+                <mat-nav-list *ngIf="role == 'admin'" routerLink="admin">
+                    <a mat-button><mat-icon>account_circle</mat-icon> Admin</a>
                 </mat-nav-list>
             </mat-sidenav>
             <mat-sidenav-content>

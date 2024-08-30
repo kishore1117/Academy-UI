@@ -13,6 +13,8 @@ import { UserService } from "./service/user.service";
 export class AcademyComponent {
   isLoggedIn: boolean = true;
   isMobile: boolean;
+  role: any;
+  token:any;
 
 
   constructor(
@@ -21,6 +23,7 @@ export class AcademyComponent {
     private userService: UserService
   ) {}
   ngOnInit() {
+    this.role = localStorage.getItem('role')
     this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {
       if (screenSize.matches) {
         this.isMobile = true;
@@ -32,7 +35,7 @@ export class AcademyComponent {
   
 
   logout() {
-    localStorage.removeItem("token");
+    localStorage.clear()
     this.router.navigate(["session/login"]);
   }
 }

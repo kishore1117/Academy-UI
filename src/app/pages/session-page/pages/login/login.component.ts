@@ -3,8 +3,9 @@ import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { jwtDecode } from "jwt-decode";
 
-
+var decodeValue:any
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(loginCres).subscribe({
       next:(res:any)=>{
+        decodeValue = jwtDecode(res.token)
         localStorage.setItem('token', res.token);
+        localStorage.setItem('role',decodeValue.role)
         this.credForm.reset();
         this.toastr.success('Login successfull')
         this.router.navigate(['academy/dashboard'])
