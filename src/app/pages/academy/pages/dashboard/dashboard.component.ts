@@ -1,8 +1,11 @@
-import { Component,ChangeDetectorRef, } from '@angular/core';
-import { UserService } from '../../service/user.service';
-import { JwtPayload, locationResponse } from "../../academy-models/academy.module";
+import { Component } from '@angular/core';
+import {  locationResponse } from "../../academy-models/academy.module";
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/shared/service/data.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {  reset } from '../../../../shared/store/actions/counter.action';
+import { selectCurrentUser, selectUserError, selectUserLoading } from 'src/app/shared/store/selectors/current-user.selector';
+import { AppState } from 'src/app/shared/store/app.state';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,28 +14,27 @@ import { DataService } from 'src/app/shared/service/data.service';
 })
 
 export class DashboardComponent {
+  user$: Observable<any | null>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
   constructor(
-    private userService: UserService,
     private router: Router,
-    private dataService: DataService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+    private store: Store<AppState>
+  ) {
+    this.store.select(selectCurrentUser).subscribe((item)=>{
+      this.location = item?.location
+      this.isLoading=false
+    });  
+    this.loading$ = this.store.select(selectUserLoading);
+    this.error$ = this.store.select(selectUserError);
+  }
   location: locationResponse[]
   isLoading: boolean = true;
   
-  ngOnInit() {
-    this.userService.getUser().subscribe({
-      next:(res:any)=>{
-        this.location =res.location
-        this.changeDetectorRef.detectChanges()
-        this.isLoading=false
-      },
-      error:(err:any)=>{
-        console.log(err)
-      }
-    })
-  }
   navigate(id:number){
     this.router.navigate([`academy/location`,id]);
+  }
+  ngdestroy(){
+    this.store.dispatch(reset())
   }
 }

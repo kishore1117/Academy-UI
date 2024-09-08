@@ -1,18 +1,30 @@
-import { Component, Inject ,ChangeDetectorRef} from "@angular/core";
+import { Component, Inject} from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { StudentService } from "../../service/student.service";
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: "app-student-model",
   templateUrl: "./student-model.component.html",
-  styleUrls: ["./student-model.component.scss"]
+  styleUrls: ["./student-model.component.scss"],
+  providers: [DatePipe]
 })
 export class StudentModelComponent {
   studentForm: FormGroup;
-  roles = ["Batsman", "Bowler", "All-rounder"];
+  date:any
+  roles: { value: string, label: string }[] = [
+    { value: 'Batsman', label: 'Batsman' },
+    { value: 'Bowler', label: 'Bowler' },
+    { value: 'All-rounder', label: 'All-rounder'}
+  ];
+  kitBag:{value:boolean,label:string}[]=[
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' }
+  ]
+
   constructor(
     private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data:{
@@ -23,6 +35,7 @@ export class StudentModelComponent {
     public dialog: MatDialogRef<any>,
     private studentService :StudentService,
     private toastr: ToastrService,
+    private datePipe: DatePipe
   ) {
     this.studentForm = new FormGroup({
       name: new FormControl(""),
@@ -38,6 +51,10 @@ export class StudentModelComponent {
     });
   }
   ngOnInit() {
+    if(this.data.formData){
+      this.date = this.datePipe.transform(this.data.formData.birth_date, 'yyyy-MM-dd')
+      this.data.formData.birth_date = this.date;
+    }
     this.studentForm.patchValue(this.data.formData)
   }
   submit() {
