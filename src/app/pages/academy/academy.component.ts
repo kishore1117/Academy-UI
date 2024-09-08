@@ -1,7 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Router } from "@angular/router";
-import { UserService } from "./service/user.service";
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/shared/store/app.state';
+import { loadUser } from 'src/app/shared/store/actions/current-user.action';
+import { MatSidenav } from "@angular/material/sidenav";
 
 
 
@@ -11,6 +14,7 @@ import { UserService } from "./service/user.service";
   styleUrls: ["./academy.component.scss"]
 })
 export class AcademyComponent {
+  @ViewChild('Sidenav') public sidenav: MatSidenav;
   isLoggedIn: boolean = true;
   isMobile: boolean;
   role: any;
@@ -20,9 +24,10 @@ export class AcademyComponent {
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private userService: UserService
+    private store: Store<AppState>,
   ) {}
   ngOnInit() {
+    this.store.dispatch(loadUser())
     this.role = localStorage.getItem('role')
     this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {
       if (screenSize.matches) {
@@ -32,7 +37,11 @@ export class AcademyComponent {
       }
     });
   }
-  
+  close(){
+    if(this.isMobile){
+      this.sidenav.toggle()
+    }
+  }
 
   logout() {
     localStorage.clear()

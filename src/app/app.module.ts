@@ -11,6 +11,11 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'environment/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './shared/store/reducers/counter.reducer';
+import { userReducer } from './shared/store/reducers/current-user.reducer';
+import { UserEffects } from './shared/store/effects/current-user.effects';
 
 
 @NgModule({
@@ -28,7 +33,9 @@ import { environment } from 'environment/environment';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    StoreModule.forRoot({ user: userReducer }),
     BrowserAnimationsModule,
+    EffectsModule.forRoot([UserEffects]),
     provideFirebaseApp(() => initializeApp(environment)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

@@ -45,13 +45,14 @@
                 <div class="field">
                     <label for="password"><strong>Cricket kit</strong></label>
                     <div class="input-kit">
-                        <!-- <input type="radio" id="kit" formControlName="kit_bag" required> -->
-                        <label>
-                            <input type="radio" value="true" formControlName="kit_bag"> Yes
-                        </label>
-                        <label>
-                            <input type="radio" value="false" formControlName="kit_bag"> No
-                        </label>
+                        <label *ngFor="let option of kitBag">
+                            <input
+                              type="radio"
+                              formControlName="kit_bag"
+                              [value]="option.value"
+                            />
+                            {{ option.label }}
+                          </label>
                         <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
                     </div>
                 </div>
@@ -66,7 +67,7 @@
                     <label for="role"><strong>Cricket role</strong></label>
                     <div class="input" >
                         <select name="role" id="role" formControlName="cricket_role">
-                            <option *ngFor="let role of roles">{{role}}</option>
+                            <option *ngFor="let role of roles" [value]="role.value ">{{role.label}}</option>
                         </select>
                         <!-- <input type="radio" id="role"  formControlName="cricket_role" required> -->
                         <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->

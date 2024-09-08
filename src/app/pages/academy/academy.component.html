@@ -40,10 +40,10 @@
         <mat-sidenav-container>
             <mat-sidenav class="sidenav" #Sidenav [mode]="isMobile ? 'over' : 'side' "
                 [opened]="isMobile ? 'false' : 'true'">
-                <mat-nav-list routerLink="dashboard">
+                <mat-nav-list routerLink="dashboard" (click)="close()">
                     <a mat-button><mat-icon>dashboard</mat-icon> Dashboard</a>
                 </mat-nav-list>
-                <mat-nav-list *ngIf="role == 'admin'" routerLink="admin">
+                <mat-nav-list *ngIf="role == 'admin'" routerLink="admin" (click)="close()">
                     <a mat-button><mat-icon>account_circle</mat-icon> Admin</a>
                 </mat-nav-list>
             </mat-sidenav>
