@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/app.state';
 import { loadUser } from 'src/app/shared/store/actions/current-user.action';
 import { MatSidenav } from "@angular/material/sidenav";
+import { sideNavData} from "./sidenav-data/sidenav-data";
+import { selectCurrentUser } from 'src/app/shared/store/selectors/current-user.selector';
 
 
 
@@ -17,8 +19,10 @@ export class AcademyComponent {
   @ViewChild('Sidenav') public sidenav: MatSidenav;
   isLoggedIn: boolean = true;
   isMobile: boolean;
+  data:any
   role: any;
   token:any;
+  user$:any
 
 
   constructor(
@@ -27,6 +31,10 @@ export class AcademyComponent {
     private store: Store<AppState>,
   ) {}
   ngOnInit() {
+    this.store.select(selectCurrentUser).subscribe((item)=>{
+      this.user$ = item
+    }); 
+    this.data = sideNavData.data
     this.store.dispatch(loadUser())
     this.role = localStorage.getItem('role')
     this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {

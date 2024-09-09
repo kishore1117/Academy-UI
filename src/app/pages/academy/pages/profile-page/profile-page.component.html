@@ -1,0 +1,27 @@
+<div class="profile-container">
+    <div class="header">
+
+    </div>
+    <div class="content">
+        <p-card [style]="{ width: '360px' }">
+            <p-avatar class="avatar" image="{{user$?.picture}}" styleClass="mr-2"
+                size="xlarge" shape="circle" />
+            <p>{{user$?.name}}</p>
+            <ng-template pTemplate="footer">
+                <div class="flex gap-3 mt-1">
+                    <div class="card flex justify-content-center">
+                        <p-fileUpload 
+                            mode="basic" 
+                            chooseLabel="Choose" 
+                            chooseIcon="pi pi-upload"
+                            name="demo[]" 
+                            url="https://www.primefaces.org/cdn/api/upload.php" 
+                            accept="image/*" 
+                            maxFileSize="1000000" 
+                            (onUpload)="onUpload($event)" />
+                    </div>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

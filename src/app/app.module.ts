@@ -13,9 +13,9 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'environment/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './shared/store/reducers/counter.reducer';
 import { userReducer } from './shared/store/reducers/current-user.reducer';
 import { UserEffects } from './shared/store/effects/current-user.effects';
+
 
 
 @NgModule({
