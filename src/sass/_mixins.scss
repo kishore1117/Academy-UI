@@ -1,0 +1,113 @@
+$xs-width:320px;
+
+$xms-width:390px;
+
+$sm-width:599px;
+
+$md-width:769px;
+
+$lg-width:1024px;
+
+$xt-width:1150px;
+
+$xxl-width:1440px;
+
+@mixin xtraSmallAndUp{
+    @media only screen and (min-width: #{$xms-width + 1}){
+        @content;
+    }
+}
+
+@mixin smallAndUp{
+    @media only screen and (min-width: #{$sm-width + 1}){
+        @content;
+    }
+}
+
+@mixin mediumAndUp{
+    @media only screen and (min-width: #{$md-width + 1}){
+        @content;
+    }
+}
+
+@mixin xTAndUp{
+    @media only screen and (min-width: #{$xt-width + 1}){
+        @content;
+    }
+}
+@mixin largeAndUp{
+    @media only screen and (min-width: #{$lg-width + 1}){
+        @content;
+    }
+}
+@mixin xtAndUp{
+    @media only screen and (min-width: #{$xt-width + 1}){
+        @content;
+    }
+}
+
+@mixin xtaLargeAndUp{
+    @media only screen and (min-width: #{$xl-width + 1}){
+        @content;
+    }
+}
+
+@mixin xtraXtraLargeAndUp{
+    @media only screen and (min-width: #{$xxl-width + 1}){
+        @content;
+    }
+}
+
+@mixin xtrasmallMedium{
+    @media only screen and (min-width: #{$xs-width}) and (max-width: #{$xms-width}){
+        @content;
+    }
+}
+
+@mixin xtrasmall{
+    @media only screen and (min-width: #{$xs-width}) and (max-width: #{$sm-width}){
+        @content;
+    }
+}
+
+@mixin small{
+    @media only screen and (min-width: #{$sm-width}) and (max-width: #{$md-width}){
+        @content;
+    }
+}
+
+@mixin medium{
+    @media only screen and (min-width: #{$md-width}) and (max-width: #{$lg-width}){
+        @content;
+    }
+}
+
+@mixin large{
+    @media only screen and (min-width: #{$xs-width}) and (max-width: #{$lg-width}){
+        @content;
+    }
+}
+
+@mixin xtralarge{
+    @media only screen and (min-width: #{$xl-width+1}){
+        @content;
+    }
+}
+
+@mixin doublextraLargeAndUp{
+    @media only screen and (min-width: #{$xxl-width+1}){
+        @content;
+    }
+}
+
+@mixin doublextraLarge{
+    @media only screen and (min-width: #{$xxl-width - 1}){
+        @content;
+    }
+}
+
+@mixin ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

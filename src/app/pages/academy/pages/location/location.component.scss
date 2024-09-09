@@ -1,0 +1,56 @@
+@import 'mixins';
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    margin-top: 1em;
+}
+@include xtrasmall {
+    .body{
+        flex-direction: column;
+        justify-content: center;
+        .card{
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+}
+.table{
+    overflow: auto;
+}
+
+.card{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    h2{
+        margin-left: 1.2em;
+        margin-top: 1em;
+    }
+    .user{
+        margin-right: 1.2em;
+        margin-top: 1em;
+    }
+}
+.user{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1em;
+    .demo-button{
+        margin-right: 0.6em;
+    }
+}
+.locaion-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

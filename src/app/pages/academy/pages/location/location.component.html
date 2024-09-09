@@ -1,0 +1,76 @@
+<div class="header">
+<h2>Location</h2>
+<div class="user">
+  <button mat-raised-button (click)="addData()" class="demo-button">
+      Add user
+    </button>
+    <button mat-raised-button (click)="backClicked()">Back</button>
+</div>
+</div>
+ 
+<div class="body">
+  <div class="locaion-info">
+    <mat-card class="card">
+      <mat-card-header>
+          <mat-card-title *ngIf="location">{{location.name}} </mat-card-title>
+          <mat-card-subtitle *ngIf="location">{{location.city}}</mat-card-subtitle>
+      </mat-card-header>
+      <img width="100px" height="100px" src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png" alt="test">
+      <mat-card-content *ngIf="location">
+          <p>{{location.address}}</p>
+      </mat-card-content>
+  </mat-card>
+  </div>
+  <app-loader *ngIf="isLoading"></app-loader>
+    <div class="table"  *ngIf="!isLoading">
+        <table mat-table [dataSource]="student" class="mat-elevation-z8">
+            <ng-container matColumnDef="No">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Number">
+              <th mat-header-cell *matHeaderCellDef> Number </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Email">
+              <th mat-header-cell *matHeaderCellDef>Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef> Role</th>
+                <td mat-cell *matCellDef="let element"> {{element.cricket_role}} </td>
+              </ng-container>
+              <ng-container matColumnDef="school">
+                <th mat-header-cell *matHeaderCellDef> School </th>
+                <td mat-cell *matCellDef="let element"> {{element.school}} </td>
+              </ng-container>
+              <ng-container matColumnDef="student type">
+                <th mat-header-cell *matHeaderCellDef> type </th>
+                <td mat-cell *matCellDef="let element"> {{element.student_type}} </td>
+              </ng-container>
+              <ng-container mat-header-cell  matColumnDef="update">
+                <td mat-header-cell  *matHeaderCellDef >Update</td>
+                <td mat-cell  *matCellDef="let element">
+                  <button mat-icon-button color="primary" (click)="updateData(element,element.id)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+                <ng-container mat-header-cell  matColumnDef="delete">
+                  <td mat-header-cell  *matHeaderCellDef >Delete</td>
+                  <td mat-cell  *matCellDef="let element">
+                    <button mat-icon-button (click)="deleteRow(element.id)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+
+</div>

@@ -1,22 +1,40 @@
 
 <form class="signupForm"  [formGroup]="signupForm">
-    <h2>Signup</h2>
-    <div>
-        <label for="name">Name:</label>
-        <input type="name" id="'name" name="name" formControlName="name" required>
+    <div class="heading">
+        <h2>Signup</h2>
     </div>
-    <div>
-        <label for="phone_number">Phone number:</label>
-        <input type="phone_number" id="phone_number" name="phone_number"  formControlName="phone_number" required>
+    <div class="body">
+        <div class="field">
+            <label for="name"><strong>Name</strong></label>
+            <div class="input">
+                <input type="name" id="'name" name="name" formControlName="name" required>
+                <p class='error_msg' *ngIf="signupForm.get('name')!.invalid && signupForm.get('name')!.touched">name is empty</p>
+            </div>
+        </div>
+        <div class="field">
+            <label for="phone_number"><strong>Phone number</strong></label>
+            <div class="input">
+                <input type="phone_number" id="phone_number" name="phone_number"  formControlName="phone_number" required>
+                <p class='error_msg' *ngIf="signupForm.get('phone_number')!.invalid && signupForm.get('phone_number')!.touched">Phone number is empty or not valid</p>
+            </div>
+        </div>
+        <div class="field">
+            <label for="email"><strong> Email</strong></label>
+            <div class="input">
+                <input type="email" id="email" name="email" formControlName="email" required>
+                <p class='error_msg' *ngIf="signupForm.get('email')!.invalid && signupForm.get('email')!.touched">Email is empty or invalid</p>
+            </div>
+        </div>
+        <div class="field">
+            <label for="password"><strong>Password</strong></label>
+            <div class="input">
+                <input type="password" id="password" name="password" formControlName="password" required>
+                <p class='error_msg' *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched">Password is empty or invalid</p>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" formControlName="email" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" formControlName="password" required>
-    </div>
-    <button type="submit" (click)="onSubmit()">Signup</button>
-    <p>Already have an account? <button (click)="redirect()">Login</button></p>
+   <div class="footer" >
+    <button [disabled]="!signupForm.valid" class="btn" type="submit" (click)="onSubmit()"><strong> Signup</strong></button>
+    <p><strong> Already have an account, Please  </strong> <a (click)="redirect()">Login</a></p>
+   </div>
 </form>

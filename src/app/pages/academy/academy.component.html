@@ -1,1 +1,42 @@
-<p>academy works!</p>
+<div class="main">
+    <div class="header">
+        <mat-toolbar class="mat-elevation">
+            <div class="menu">
+                <button (click)="Sidenav.toggle()" mat-icon-button>
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <img width="70px" height="70px" src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png"
+                    alt="test">
+                <h2 *ngIf="!isMobile"><strong>Legacy Cricket Academy</strong></h2>
+                <h2 *ngIf=" isMobile"><strong>LCA</strong></h2>
+            </div>
+            <div class="user-details">
+                <p-avatar [matMenuTriggerFor]="lvl1master" class="avatar" image="{{user$?.picture}}" styleClass="mr-2"
+                    size="normal" shape="circle" />
+                <mat-menu #lvl1master="matMenu" >
+                    <div>
+                        <button mat-menu-item disabled>{{user$?.name}}</button>
+                        <button mat-menu-item  disabled>{{user$?.email}}</button>
+                        <button mat-menu-item  disabled>{{user$?.role}}</button>
+                    </div>
+                <button mat-menu-item (click)="logout()">Logout</button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+    </div>
+    <div class="body">
+        <mat-sidenav-container>
+            <mat-sidenav class="sidenav" #Sidenav [mode]="isMobile ? 'over' : 'side' "
+                [opened]="isMobile ? 'false' : 'true'">
+                <mat-nav-list *ngFor="let list of data" [routerLink]="list.path" (click)="close()">
+                    <a mat-button><mat-icon>{{list.icon}}</mat-icon>{{list.name}}</a>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <div style="text-align: center;height:88vh;">
+                    <router-outlet></router-outlet>
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+@import 'mixins';
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+    img {
+        cursor: pointer;
+      }
+
+.userDetails{
+    margin-right: 1em;
+}

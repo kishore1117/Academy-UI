@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="container-header">
+        <h2>{{data.formData ? 'Update': 'Create'}} student</h2>
+    </div>
+    <form class="studentForm" [formGroup]="studentForm">
+        <div class="body">
+            <div class="left-side">
+                <div class="field">
+                    <label for="email"><strong>Name</strong></label>
+                    <div class="input">
+                        <input type="email" id="name" name="email" formControlName="name" required>
+                        <!-- <p *ngIf="credForm.get('email')!.invalid && credForm.get('email')!.touched">Email is empty or invalid</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password"><strong>Unique Id</strong></label>
+                    <div class="input">
+                        <input type="text" id="unique_id" name="password" formControlName="client_unique_id" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password"><strong>D.O.B</strong></label>
+                    <div class="input">
+                        <input type="date" id="date" name="date" formControlName="birth_date" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="numner"><strong>Phone No</strong></label>
+                    <div class="input">
+                        <input type="number" id="email" name="number" formControlName="phone_number" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password"><strong>Email</strong></label>
+                    <div class="input">
+                        <input type="email" id="email" name="email" formControlName="email" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="field">
+                    <label for="password"><strong>Cricket kit</strong></label>
+                    <div class="input-kit">
+                        <label *ngFor="let option of kitBag">
+                            <input
+                              type="radio"
+                              formControlName="kit_bag"
+                              [value]="option.value"
+                            />
+                            {{ option.label }}
+                          </label>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password"><strong>School</strong></label>
+                    <div class="input">
+                        <input type="text" id="school" name="school" formControlName="school" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="role"><strong>Cricket role</strong></label>
+                    <div class="input" >
+                        <select name="role" id="role" formControlName="cricket_role">
+                            <option *ngFor="let role of roles" [value]="role.value ">{{role.label}}</option>
+                        </select>
+                        <!-- <input type="radio" id="role"  formControlName="cricket_role" required> -->
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password"><strong>Student type</strong></label>
+                    <div class="input">
+                        <input type="text" id="type" name="password" formControlName="student_type" required>
+                        <!-- <p *ngIf="credForm.get('password')!.invalid && credForm.get('password')!.touched">Password is empty</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="btn" type="submit" (click)="submit()"><strong>{{data.formData ? 'update': 'create'}}</strong></button>
+            <button class="btn-close" type="cancel" (click)="close()"><strong>Close</strong></button>
+        </div>
+    </form>
+</div>
