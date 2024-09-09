@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { LocationComponent } from "./pages/location/location.component";
 import { AdminComponent } from "./pages/admin/admin.component";
+import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
 
 
 
@@ -24,6 +25,10 @@ const routes: Routes = [
             {
                 path:'admin',
                 component:AdminComponent
+            },
+            {
+                path:'profile',
+                component:ProfilePageComponent
             }
         ]
     }

@@ -43,4 +43,8 @@ export class UserService{
     getFranchiseUser(franchise_id:number):Observable<any>{
         return this.http.get<any>(`${this.url}/users/franchise/${franchise_id}`,{ headers: this.headers })
     }
+
+    updateUser(data:any,id:number):Observable<any>{
+        return this.http.patch<any>(`${this.url}/user/${id}`,data,{ headers: this.headers })
+    }
 }

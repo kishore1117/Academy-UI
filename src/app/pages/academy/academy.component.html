@@ -5,46 +5,31 @@
                 <button (click)="Sidenav.toggle()" mat-icon-button>
                     <mat-icon>menu</mat-icon>
                 </button>
-                <img width="70px" height="70px" src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png" alt="test">
+                <img width="70px" height="70px" src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png"
+                    alt="test">
                 <h2 *ngIf="!isMobile"><strong>Legacy Cricket Academy</strong></h2>
                 <h2 *ngIf=" isMobile"><strong>LCA</strong></h2>
             </div>
             <div class="user-details">
-                <button [matMenuTriggerFor]="lvl1master" style="border-radius: 30%; align-items: self-end;" mat-button> <img width="20px" height="20px" src="../../../assets/icons8-user-30.png"> </button>
+                <p-avatar [matMenuTriggerFor]="lvl1master" class="avatar" image="{{user$?.picture}}" styleClass="mr-2"
+                    size="normal" shape="circle" />
                 <mat-menu #lvl1master="matMenu" >
-                    <button mat-menu-item (click)="logout()">Logout</button>
+                    <div>
+                        <button mat-menu-item disabled>{{user$?.name}}</button>
+                        <button mat-menu-item  disabled>{{user$?.email}}</button>
+                        <button mat-menu-item  disabled>{{user$?.role}}</button>
+                    </div>
+                <button mat-menu-item (click)="logout()">Logout</button>
                 </mat-menu>
-                <!-- <mat-menu #company="matMenu">
-                    <button mat-menu-item>Term</button>
-                    <button mat-menu-item>Tax</button>
-                    <button mat-menu-item>Currency</button>
-                </mat-menu>
-                <mat-menu #customer="matMenu">
-                    <button mat-menu-item>Type</button>
-                    <button mat-menu-item>Tax</button>
-                </mat-menu>
-                <mat-menu #product="matMenu">
-                    <button mat-menu-item>Category</button>
-                    <button [matMenuTriggerFor]="variant" mat-menu-item>Variant</button>
-                    <button mat-menu-item>UOM</button>
-                </mat-menu>
-            
-                <mat-menu #variant="matMenu">
-                    <button mat-menu-item>Color</button>
-                    <button mat-menu-item>Size</button>
-                </mat-menu> -->
-            </div>                
+            </div>
         </mat-toolbar>
     </div>
     <div class="body">
         <mat-sidenav-container>
             <mat-sidenav class="sidenav" #Sidenav [mode]="isMobile ? 'over' : 'side' "
                 [opened]="isMobile ? 'false' : 'true'">
-                <mat-nav-list routerLink="dashboard" (click)="close()">
-                    <a mat-button><mat-icon>dashboard</mat-icon> Dashboard</a>
-                </mat-nav-list>
-                <mat-nav-list *ngIf="role == 'admin'" routerLink="admin" (click)="close()">
-                    <a mat-button><mat-icon>account_circle</mat-icon> Admin</a>
+                <mat-nav-list *ngFor="let list of data" [routerLink]="list.path" (click)="close()">
+                    <a mat-button><mat-icon>{{list.icon}}</mat-icon>{{list.name}}</a>
                 </mat-nav-list>
             </mat-sidenav>
             <mat-sidenav-content>
