@@ -14,13 +14,13 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastrModule } from 'ngx-toastr';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'environment/environment';
 import {AngularFireModule} from '@angular/fire/compat'
-import { AngularFireStorage, AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { InputTextModule } from 'primeng/inputtext';
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
     declarations:[
@@ -41,6 +41,10 @@ import { AngularFireStorage, AngularFireStorageModule } from "@angular/fire/comp
         CardModule,
         ButtonModule,
         FileUploadModule,
+        InputTextModule,
+        FloatLabelModule,
+        DropdownModule,
+        RadioButtonModule,
         ToastrModule.forRoot({
             timeOut: 2000,
             positionClass: 'toast-top-center',

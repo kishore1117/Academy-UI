@@ -12,8 +12,9 @@ import { ToastrService } from "ngx-toastr";
 import { AppState } from "src/app/shared/store/app.state";
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from "src/app/shared/store/selectors/current-user.selector";
-import { loadUser } from "src/app/shared/store/actions/current-user.action";
 import { reset } from "src/app/shared/store/actions/counter.action";
+import { Subject, Subscription } from 'rxjs';
+
 
 @Component({
   selector: "app-admin",
@@ -21,6 +22,7 @@ import { reset } from "src/app/shared/store/actions/counter.action";
   styleUrls: ["./admin.component.scss"]
 })
 export class AdminComponent {
+  private subscription: Subscription = new Subscription();
   constructor(
     private _location: Location,
     private toastr: ToastrService,
@@ -81,20 +83,23 @@ export class AdminComponent {
   }
 
   onSubmit() {
-    this.userService.setInvite(this.inviteForm.value).subscribe({
-      next: (res: any) => {
-        this.toastr.success(res.message);
-      },
-      error: (err: any) => {
-        this.toastr.error(err.error.message);
-      }
-    });
+    this.subscription.add(
+      this.userService.setInvite(this.inviteForm.value).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.message);
+        },
+        error: (err: any) => {
+          this.toastr.error(err.error.message);
+         
+        }
+      })
+    )
     this.inviteForm.reset();
   }
   backClicked() {
     this._location.back();
   }
   ngdestroy(){
-    this.store.dispatch(reset())
+    this.subscription.unsubscribe();
   }
 }

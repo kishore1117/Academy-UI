@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {  locationResponse } from "../../academy-models/academy.module";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,13 +7,14 @@ import {  reset } from '../../../../shared/store/actions/counter.action';
 import { selectCurrentUser, selectUserError, selectUserLoading } from 'src/app/shared/store/selectors/current-user.selector';
 import { AppState } from 'src/app/shared/store/app.state';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy{
   user$: Observable<any | null>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
@@ -34,7 +35,7 @@ export class DashboardComponent {
   navigate(id:number){
     this.router.navigate([`academy/location`,id]);
   }
-  ngdestroy(){
+  ngOnDestroy(){
     this.store.dispatch(reset())
   }
 }

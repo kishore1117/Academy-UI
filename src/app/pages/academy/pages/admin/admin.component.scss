@@ -16,6 +16,24 @@
 .card{
     width: 100%;
     padding: 1.8em;
+    margin: 0 !important;
+}
+.title{
+    display: flex;
+}
+.input{
+    display: flex;
+    margin-top: 1.2em;
+}
+label{
+    margin-bottom: 1.2em;
+}
+.role-box{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
 }
 .body{
     width: 100%;
@@ -76,6 +94,8 @@
     display: flex;
 }
 .location{
+    display: flex;
+    flex-direction: column;
     margin-top: 0.4em;
     .loaction-toggle{
 
@@ -86,7 +106,7 @@
 }
 .loc-checkbox{
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     .checkbox-content{
         padding: 0.4em;
         label,input{

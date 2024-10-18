@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { locationResponse } from "../../academy-models/academy.module";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../service/user.service";
@@ -9,13 +9,16 @@ import { ConfirmationModelComponent } from "src/app/shared/components/confirmati
 import { StudentService } from "../../service/student.service";
 import { ToastrService } from 'ngx-toastr';
 import { BreakpointObserver } from "@angular/cdk/layout";
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: "app-location",
   templateUrl: "./location.component.html",
   styleUrls: ["./location.component.scss"]
 })
-export class LocationComponent {
+export class LocationComponent  implements OnDestroy {
+
+  private subscription: Subscription = new Subscription();
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -50,26 +53,30 @@ export class LocationComponent {
     this._location.back();
   }
   getLocation(){
-    this.userService.getLocationById(this.id).subscribe({
-      next: (res: any) => {
-        this.location = res;
-        this.isLoading=false
-      },
-      error: (err: any) => {
-        console.log(err);
-        this.isLoading=false
-      }
-    });
+    this.subscription.add(
+      this.userService.getLocationById(this.id).subscribe({
+        next: (res: any) => {
+          this.location = res;
+          this.isLoading=false
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.isLoading=false
+        }
+      })
+    )
   }
   getLocationStudents(){
-    this.userService.getLocationStudents(this.id).subscribe({
-      next:(res:any)=>{
-        this.student = res
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    })
+    this.subscription.add(
+      this.userService.getLocationStudents(this.id).subscribe({
+        next:(res:any)=>{
+          this.student = res
+        },
+        error: (err: any) => {
+          console.log(err);
+        }
+      })
+    )
   }
 
   addData(){
@@ -100,17 +107,23 @@ export class LocationComponent {
     dilogRef.afterClosed().subscribe({
       next:(val)=>{
         if(val){
-          this.studentService.deleteStudent(id).subscribe({
-            next:((res)=>{
-              this.toastr.success(res.message)
-              this.getLocationStudents();
-            }),
-            error:((err:any)=>{
-              this.toastr.error(err.error.message)
+          this.subscription.add(
+            this.studentService.deleteStudent(id).subscribe({
+              next:((res)=>{
+                this.toastr.success(res.message)
+                this.getLocationStudents();
+              }),
+              error:((err:any)=>{
+                this.toastr.error(err.error.message)
+              })
             })
-          })
+          )
         }
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

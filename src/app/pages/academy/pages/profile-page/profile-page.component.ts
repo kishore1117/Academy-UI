@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { selectCurrentUser } from 'src/app/shared/store/selectors/current-user.selector';
 import { UserService } from '../../service/user.service';
-import { subscribe } from 'diagnostics_channel';
 
 
 @Component({

@@ -7,7 +7,7 @@ import { loadUser } from 'src/app/shared/store/actions/current-user.action';
 import { MatSidenav } from "@angular/material/sidenav";
 import { sideNavData} from "./sidenav-data/sidenav-data";
 import { selectCurrentUser } from 'src/app/shared/store/selectors/current-user.selector';
-
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,6 +16,7 @@ import { selectCurrentUser } from 'src/app/shared/store/selectors/current-user.s
   styleUrls: ["./academy.component.scss"]
 })
 export class AcademyComponent {
+  private subscription: Subscription = new Subscription();
   @ViewChild('Sidenav') public sidenav: MatSidenav;
   isLoggedIn: boolean = true;
   isMobile: boolean;
@@ -37,13 +38,15 @@ export class AcademyComponent {
     this.data = sideNavData.data
     this.store.dispatch(loadUser())
     this.role = localStorage.getItem('role')
-    this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
+    this.subscription.add(
+      this.observer.observe(["(max-width: 800px)"]).subscribe(screenSize => {
+        if (screenSize.matches) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
+      })
+    )
   }
   close(){
     if(this.isMobile){
@@ -54,5 +57,9 @@ export class AcademyComponent {
   logout() {
     localStorage.clear()
     this.router.navigate(["session/login"]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
