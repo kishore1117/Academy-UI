@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { jwtDecode } from "jwt-decode";
+import { MessageService } from 'primeng/api';
 
 var decodeValue:any
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private messageService: MessageService
    ) {}
    ngOnInit(): void {
     this.credForm = new FormGroup({
@@ -38,11 +40,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
         localStorage.setItem('role',decodeValue.role)
         this.credForm.reset();
-        this.toastr.success('Login successfull')
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login successfull',life: 15000  });
         this.router.navigate(['academy/dashboard'])
       },
       error:(err:any)=>{
-        this.toastr.error(err.error.message)
+        console.log(err)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.message ,life: 115000});
         this.credForm.reset();
       }
     })

@@ -12,7 +12,6 @@ import { ToastrService } from "ngx-toastr";
 import { AppState } from "src/app/shared/store/app.state";
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from "src/app/shared/store/selectors/current-user.selector";
-import { reset } from "src/app/shared/store/actions/counter.action";
 import { Subject, Subscription } from 'rxjs';
 
 
@@ -62,6 +61,7 @@ export class AdminComponent {
     return this, this.inviteForm.get("franchise_id") as FormControl;
   }
   readonly panelOpenState = signal(false);
+
   ngOnInit() {
     this.inviteForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],

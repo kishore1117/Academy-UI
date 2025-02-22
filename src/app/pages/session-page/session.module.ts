@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from "src/app/shared/shared.module";
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations:[
@@ -18,6 +19,7 @@ import { SharedModule } from "src/app/shared/shared.module";
     imports:[
         SessionRoutingModule,
         FormsModule,
+          ToastModule,
         ReactiveFormsModule,
         SharedModule,
         ToastrModule.forRoot({

@@ -41,7 +41,7 @@ export class ProfilePageComponent {
     this.fireStorage.ref(path).getDownloadURL().subscribe((item)=>{
       this.url = item;
                 const data = {
-        "picture":this.url
+        "profile_url":this.url
       }
            this.usersService.updateUser(data,this.user$.id).subscribe((res)=>{
         this.toastr.success('Profile Picture updated successfully')

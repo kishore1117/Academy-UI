@@ -15,6 +15,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './shared/store/reducers/current-user.reducer';
 import { UserEffects } from './shared/store/effects/current-user.effects';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
 
 
 
@@ -28,6 +31,7 @@ import { UserEffects } from './shared/store/effects/current-user.effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ToastModule,
     ToastrModule.forRoot({
       timeOut:2000 ,
       positionClass: 'toast-top-center',
@@ -41,7 +45,7 @@ import { UserEffects } from './shared/store/effects/current-user.effects';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

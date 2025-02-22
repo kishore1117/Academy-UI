@@ -1,6 +1,6 @@
 // user.reducer.ts
 import { createReducer, on } from '@ngrx/store';
-import { loadUser, loadUserSuccess, loadUserFailure } from '../actions/current-user.action';
+import { loadUser, loadUserSuccess, loadUserFailure, loadFranchiseUser } from '../actions/current-user.action';
 
 export interface UserState {
   user: any | null;
@@ -30,5 +30,10 @@ export const userReducer = createReducer(
     ...state,
     error,
     loading: false,
-  }))
+  })),
+  on(loadFranchiseUser, state => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
 );

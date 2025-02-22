@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UserService } from "src/app/pages/academy/service/user.service";
-import { loadUser, loadUserSuccess, loadUserFailure } from '../actions/current-user.action';
+import { loadUser, loadUserSuccess, loadUserFailure, franchiseUserSuccess, franchiseUserFailure, loadFranchiseUser } from '../actions/current-user.action';
 
 @Injectable()
 export class UserEffects {
@@ -20,8 +20,21 @@ export class UserEffects {
     )
   );
 
+
+  franchiseUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadFranchiseUser),
+      switchMap( active =>
+        this.userService.getFranchiseUser(active.franchise_id).pipe(
+          map(users => franchiseUserSuccess({ users })),
+          catchError(error => of(franchiseUserFailure({ error })))
+        )
+      )
+    ))
+
+
   constructor(
     private actions$: Actions,
-    private userService: UserService
+    private userService: UserService  
   ) {}
 }

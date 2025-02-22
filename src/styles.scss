@@ -9,3 +9,45 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-datatable {
+    width: 100% !important;
+  }
+  
+  .p-datatable-thead > tr > th {
+    background-color: #f4f4f4; /* Light Gray Header */
+    color: black;
+  }
+
+  .p-datatable .p-datatable-tbody > tr {
+    height: 38px !important; /* Adjust row height */
+  }
+  
+  /* Reduce padding inside table cells */
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 4px 8px !important; /* Adjust padding */
+    font-size: 14px; /* Optional: Reduce font size */
+  }
+
+  /* Reduce table header height */
+.p-datatable .p-datatable-thead > tr > th {
+    padding: 5px 10px !important;
+  }
+  
+  /* Reduce table footer height */
+  .p-datatable .p-datatable-tfoot > tr > td {
+    padding: 5px 10px !important;
+  }
+
+  .p-tabview .p-tabview-nav {
+    display: flex !important;
+  }
+  
+  .p-tabview .p-tabview-panels {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    background: white;
+  }
+  .p-splitbutton .p-menu {
+    pointer-events: auto !important;
+  }
