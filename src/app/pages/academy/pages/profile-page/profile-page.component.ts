@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { selectCurrentUser } from 'src/app/shared/store/selectors/current-user.selector';
 import { UserService } from '../../service/user.service';
-import { subscribe } from 'diagnostics_channel';
 
 
 @Component({
@@ -42,7 +41,7 @@ export class ProfilePageComponent {
     this.fireStorage.ref(path).getDownloadURL().subscribe((item)=>{
       this.url = item;
                 const data = {
-        "picture":this.url
+        "profile_url":this.url
       }
            this.usersService.updateUser(data,this.user$.id).subscribe((res)=>{
         this.toastr.success('Profile Picture updated successfully')

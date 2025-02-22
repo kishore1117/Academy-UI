@@ -14,13 +14,24 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastrModule } from 'ngx-toastr';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'environment/environment';
 import {AngularFireModule} from '@angular/fire/compat'
-import { AngularFireStorage, AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { InputTextModule } from 'primeng/inputtext';
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { AdminModule } from "./pages/admin/admin.module";
+import { UserService } from "./service/user.service";
+import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview'; 
+import { TagModule } from 'primeng/tag';  
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { MenuModule } from 'primeng/menu'; 
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+
+
 
 @NgModule({
     declarations:[
@@ -28,10 +39,17 @@ import { AngularFireStorage, AngularFireStorageModule } from "@angular/fire/comp
         DashboardComponent,
         LocationComponent,
         StudentModelComponent,
-        AdminComponent,
-        ProfilePageComponent,
+        ProfilePageComponent
     ],
+    providers:[UserService],
     imports:[
+        AdminModule,
+        DialogModule,
+        TagModule,
+        TabViewModule,
+        MenuModule,
+        TableModule,
+        SplitButtonModule,
         AcdemyRoutingModule,
         FormsModule,
         ReactiveFormsModule,
@@ -41,13 +59,19 @@ import { AngularFireStorage, AngularFireStorageModule } from "@angular/fire/comp
         CardModule,
         ButtonModule,
         FileUploadModule,
+        InputTextModule,
+        FloatLabelModule,
+        DropdownModule,
+        RadioButtonModule,
+        ToastModule,
         ToastrModule.forRoot({
             timeOut: 2000,
             positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
         AngularFireModule.initializeApp(environment),
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        
     ]
 })
 

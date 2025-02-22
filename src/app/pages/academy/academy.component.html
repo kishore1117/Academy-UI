@@ -11,7 +11,7 @@
                 <h2 *ngIf=" isMobile"><strong>LCA</strong></h2>
             </div>
             <div class="user-details">
-                <p-avatar [matMenuTriggerFor]="lvl1master" class="avatar" image="{{user$?.picture}}" styleClass="mr-2"
+                <p-avatar [matMenuTriggerFor]="lvl1master" class="avatar" image="{{user$?.profile_url}}" styleClass="mr-2"
                     size="normal" shape="circle" />
                 <mat-menu #lvl1master="matMenu" >
                     <div>
@@ -28,7 +28,7 @@
         <mat-sidenav-container>
             <mat-sidenav class="sidenav" #Sidenav [mode]="isMobile ? 'over' : 'side' "
                 [opened]="isMobile ? 'false' : 'true'">
-                <mat-nav-list *ngFor="let list of data" [routerLink]="list.path" (click)="close()">
+                <mat-nav-list *ngFor="let list of sidenavItems" [routerLink]="list.path" (click)="close()">
                     <a mat-button><mat-icon>{{list.icon}}</mat-icon>{{list.name}}</a>
                 </mat-nav-list>
             </mat-sidenav>

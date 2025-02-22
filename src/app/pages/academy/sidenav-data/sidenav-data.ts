@@ -3,17 +3,20 @@ export const sideNavData = {
     {
       "path": "dashboard",
       "name": "Dashboard",
-      "icon": "dashboard"
+      "icon": "dashboard",
+      "role":["admin","user"]
     },
     {
         "path":"admin",
         "name":"Admin",
-        "icon":"assignment_ind"
+        "icon":"assignment_ind",
+        "role":["admin"]
     },
     {
         "path":"profile",
         "name":"Profile",
-        "icon":"account_circle"
+        "icon":"account_circle",
+        "role":["admin","user"]
     }
   ]
 }

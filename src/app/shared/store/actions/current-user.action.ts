@@ -11,3 +11,12 @@ export const loadUserFailure = createAction(
   '[User] Load User Failure',
   props<{ error: any }>()
 );
+
+export const loadFranchiseUser = createAction(
+  '[User] Load Franchise User',
+  props<{  franchise_id:number }>()
+);
+
+export const franchiseUserSuccess = createAction('[User] Franchise User Success', props<{ users: any }>());
+
+export const franchiseUserFailure = createAction('[User] Franchise User Failure', props<{ error: any }>());
