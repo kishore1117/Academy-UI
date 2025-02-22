@@ -1,76 +1,75 @@
 <div class="header">
-<h2>Location</h2>
-<div class="user">
-  <button mat-raised-button (click)="addData()" class="demo-button">
+  <h2>Location</h2>
+  <div class="user">
+    <button mat-raised-button (click)="addData()" class="demo-button">
       Add user
     </button>
     <button mat-raised-button (click)="backClicked()">Back</button>
+  </div>
 </div>
-</div>
- 
+
 <div class="body">
   <div class="locaion-info">
-    <mat-card class="card">
-      <mat-card-header>
-          <mat-card-title *ngIf="location">{{location.name}} </mat-card-title>
-          <mat-card-subtitle *ngIf="location">{{location.city}}</mat-card-subtitle>
-      </mat-card-header>
-      <img width="100px" height="100px" src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png" alt="test">
-      <mat-card-content *ngIf="location">
-          <p>{{location.address}}</p>
-      </mat-card-content>
-  </mat-card>
+    <div class="mb-4 p-8 flex items-center justify-center">
+      <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+        <ng-template pTemplate="header">
+          <img alt="Card" class="w-full" style="width: 50%; height:50% ;"
+            src="../../assets/cc-06 (1)-fotor-bg-remover-20240601102341.png" />
+        </ng-template>
+        <ng-template pTemplate="title"> {{location.name}} </ng-template>
+        <ng-template pTemplate="subtitle"> {{location.city}} </ng-template>
+        <p>
+          {{location.address}}
+        </p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-4 mt-1">
+            <p-button label="Edit" class="w-full" styleClass="w-full" />
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
   </div>
   <app-loader *ngIf="isLoading"></app-loader>
-    <div class="table"  *ngIf="!isLoading">
-        <table mat-table [dataSource]="student" class="mat-elevation-z8">
-            <ng-container matColumnDef="No">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Number">
-              <th mat-header-cell *matHeaderCellDef> Number </th>
-              <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Email">
-              <th mat-header-cell *matHeaderCellDef>Email </th>
-              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef> Role</th>
-                <td mat-cell *matCellDef="let element"> {{element.cricket_role}} </td>
-              </ng-container>
-              <ng-container matColumnDef="school">
-                <th mat-header-cell *matHeaderCellDef> School </th>
-                <td mat-cell *matCellDef="let element"> {{element.school}} </td>
-              </ng-container>
-              <ng-container matColumnDef="student type">
-                <th mat-header-cell *matHeaderCellDef> type </th>
-                <td mat-cell *matCellDef="let element"> {{element.student_type}} </td>
-              </ng-container>
-              <ng-container mat-header-cell  matColumnDef="update">
-                <td mat-header-cell  *matHeaderCellDef >Update</td>
-                <td mat-cell  *matCellDef="let element">
-                  <button mat-icon-button color="primary" (click)="updateData(element,element.id)">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                </td>
-              </ng-container>
-                <ng-container mat-header-cell  matColumnDef="delete">
-                  <td mat-header-cell  *matHeaderCellDef >Delete</td>
-                  <td mat-cell  *matCellDef="let element">
-                    <button mat-icon-button (click)="deleteRow(element.id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </td>
-                </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+  <div class="table">
+    <div class="mb-4">
+      <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text />
+      <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
+      <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" text />
     </div>
-
+    <p-table class="p-datatable-sm" [value]="students" [paginator]="true" [rows]="5" [first]="first"
+      [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" (onPage)="pageChange($event)"
+      [rowsPerPageOptions]="[5, 10, 30]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:25%">No</th>
+          <th style="width:25%">Name</th>
+          <th style="width:25%">Number</th>
+          <th style="width:25%">Email</th>
+          <th style="width:25%">Role</th>
+          <th style="width:25%">School</th>
+          <th style="width:25%">Update</th>
+          <th style="width:25%">Delete</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student let-i="rowIndex">
+        <tr>
+          <td>{{ i+1 }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.phone_number }}</td>
+          <td>{{ student.email }}</td>
+          <td><p-tag [value]="student.cricket_role" [severity]="getSeverity(student.cricket_role)"></p-tag></td>
+          <td>{{ student.school }}</td>
+          <td><p-button icon="pi pi-pencil" (onClick)="updateData(student,student.id)" [rounded]="true" [text]="true" /></td>
+          <td><p-button icon="pi pi-trash" (onClick)="deleteRow(student.id)" [rounded]="true" [text]="true" severity="danger" /> </td>
+        </tr>
+      </ng-template>
+      <ng-template #paginatorleft>
+        <p-button type="button" icon="pi pi-plus" text />
+      </ng-template>
+      <ng-template #paginatorright>
+        <p-button type="button" icon="pi pi-cloud" text />
+      </ng-template>
+    </p-table>
+  </div>
 </div>

@@ -4,9 +4,11 @@
     </div>
     <div class="content">
         <p-card [style]="{ width: '360px' }">
-            <p-avatar class="avatar" image="{{user$?.picture}}" styleClass="mr-2"
+            <p-avatar class="avatar" image="{{user$?.profile_url}}" styleClass="mr-2"
                 size="xlarge" shape="circle" />
             <p>{{user$?.name}}</p>
+            <p>{{user$?.email}}</p>
+            <p>{{user$?.phone_number}}</p>
             <ng-template pTemplate="footer">
                 <div class="flex gap-3 mt-1">
                     <div class="card flex justify-content-center">

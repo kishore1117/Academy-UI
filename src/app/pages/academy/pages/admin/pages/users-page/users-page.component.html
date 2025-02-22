@@ -1,0 +1,63 @@
+<div class="body">
+    <div class="left-side" [formGroup]="inviteForm">
+      <mat-card appearance="outlined" class="card">
+        <h2 class="title">User Invite</h2>
+        <div class="form">
+          <div class="input flex justify-content-left">
+            <div class="flex flex-column gap-2">
+              <input pInputText id="username" aria-describedby="username-help" formControlName="email" placeholder="Enter email"/>
+            </div>
+          </div>
+          <div class="radio flex justify-content-center">
+            <div class="role-box flex-column gap-3">
+                <div *ngFor="let category of role" class="field-checkbox">
+                    <p-radioButton 
+                    [inputId]="category.value"
+                    [value]="category.value"                  
+                    formControlName="role" />
+                    <label [for]="category.value" class="ml-2">
+                        {{ category.lable }}
+                    </label>
+                </div>
+            </div>
+        </div>
+          <div class="location">
+            <div>
+              <h3>Location access</h3>
+            </div>
+            <ng-container formArrayName ="locations" >       
+              <ng-container *ngFor="let loc of location; let i = index" >
+                <div class="loc-checkbox">
+                  <p-checkbox type="checkbox" name="location" [value]="loc.id"
+                    (onChange)="onCheckboxChange($event, loc.id)"
+                    size="large"
+                  />
+                  <label for="loc.id" class="ml-2"> {{loc.address}} </label>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <p-button label="Send Invite"  (click)="onSubmit()"
+        [disabled]="!this.inviteForm.valid"/>
+      </mat-card>
+    </div>
+    <div class="right-side">
+      <div class="list" *ngFor="let item of users">
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{item.name}} </mat-panel-title>
+              <mat-panel-description>{{item.email}}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="hidden">
+              <p>{{item.phone_number}}</p>
+              <button mat-fab aria-label="Example icon button with a delete icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>

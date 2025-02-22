@@ -1,9 +1,27 @@
-.prfile-container{
-    position: relative;
+@import 'mixins';
+
+.profile-container{
+  position: relative;
 }
 .content{
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+}
+
+
+@include large{
+    .content {
+        justify-content: center;
+        align-items: center;
+        margin-left: 1em;
+    }
+}
+
+@include largeAndUp{
+    .content {
+        margin-left: 1em;
+    }
 }
